@@ -5,7 +5,7 @@
  New-Item -Path $drive -Name $appName  -ItemType Directory -ErrorAction SilentlyContinue
  $LocalPath = $drive + '\' + $appName 
  set-Location $LocalPath
- $osOptURL = 'https://github.com/The-Virtual-Desktop-Team/Virtual-Desktop-Optimization-Tool/archive/master.zip'
+ $osOptURL = 'https://github.com/The-Virtual-Desktop-Team/Virtual-Desktop-Optimization-Tool/archive/refs/heads/main.zip'
  $osOptURLexe = 'Windows_10_VDI_Optimize-master.zip'
  $outputPath = $LocalPath + '\' + $osOptURLexe
  Invoke-WebRequest -Uri $osOptURL -OutFile $outputPath
@@ -18,7 +18,6 @@
  $osOptURL = 'https://raw.githubusercontent.com/The-Virtual-Desktop-Team/Virtual-Desktop-Optimization-Tool/master/Win10_VirtualDesktop_Optimize.ps1'
  $osOptURLexe = 'optimize.ps1'
  Invoke-WebRequest -Uri $osOptURL -OutFile $osOptURLexe
- 
  
  
  # Patch: overide the Win10_VirtualDesktop_Optimize.ps1 - setting 'Set-NetAdapterAdvancedProperty'(see readme.md)
@@ -44,6 +43,6 @@
  
  # run script
  # .\optimize -WindowsVersion 2004 -Verbose
-  .\Win10_VirtualDesktop_Optimize.ps1 -WindowsVersion 2004 -Verbose
+  .\Win10_VirtualDesktop_Optimize.ps1 -WindowsVersion 2009 -Verbose
   write-host 'AIB Customization: Finished OS Optimizations script'
  
