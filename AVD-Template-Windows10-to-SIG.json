@@ -94,8 +94,8 @@
                             "baseosimg": "[parameters('osOffer')]",
                         },
                         "replicationRegions": [
-                          "australiasoutheast",
-                          "australiaeast"
+                          "<region1>",
+                          "<region2>"
                         ]
                     }
                 ]
