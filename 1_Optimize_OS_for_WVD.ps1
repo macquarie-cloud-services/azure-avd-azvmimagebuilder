@@ -15,9 +15,9 @@
  Set-Location -Path C:\\Optimize\\Virtual-Desktop-Optimization-Tool-main
  
  # instrumentation
- #$osOptURL = 'https://raw.githubusercontent.com/The-Virtual-Desktop-Team/Virtual-Desktop-Optimization-Tool/master/Win10_VirtualDesktop_Optimize.ps1'
- #$osOptURLexe = 'optimize.ps1'
- #Invoke-WebRequest -Uri $osOptURL -OutFile $osOptURLexe
+ $osOptURL = 'https://raw.githubusercontent.com/The-Virtual-Desktop-Team/Virtual-Desktop-Optimization-Tool/master/Win10_VirtualDesktop_Optimize.ps1'
+ $osOptURLexe = 'optimize.ps1'
+ Invoke-WebRequest -Uri $osOptURL -OutFile $osOptURLexe
   
  # Patch: overide the Win10_VirtualDesktop_Optimize.ps1 - setting 'Set-NetAdapterAdvancedProperty'(see readme.md)
  Write-output 'Patch: Disabling Set-NetAdapterAdvancedProperty'
