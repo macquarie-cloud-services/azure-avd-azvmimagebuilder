@@ -2,11 +2,11 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-      "imageTemplateName": {
-        "type": "string"
+        "imageTemplateName": {
+            "type": "string"
         },
         "api-version": {
-          "type": "string"
+            "type": "string"
         },
         "osPublisher": {
             "type": "string"
@@ -56,13 +56,6 @@
                 "customize": [
                     {
                         "type": "PowerShell",
-                        "name": "installFsLogix",
-                        "runElevated": true,
-                        "runAsSystem": true,
-                        "scriptUri": "https://raw.githubusercontent.com/macquarie-cloud-services/azure-avd-azvmimagebuilder/main/0_installConfFsLogix.ps1"
-                    },
-                    {
-                        "type": "PowerShell",
                         "name": "OptimizeOS",
                         "runElevated": true,
                         "runAsSystem": true,
@@ -70,7 +63,7 @@
                     },
                     {
                         "type": "WindowsRestart",
-                        "restartCheckCommand": "write-host 'restarting post Optimizations'",
+                        "restartCheckCommand": "write-host 'Restarting post Optimizations'",
                         "restartTimeout": "5m"
                     },
                     {
