@@ -43,7 +43,7 @@
                 "buildTimeoutInMinutes" : 200,
                 "vmProfile": 
                 {
-                    "vmSize": "Standard_B2s",
+                    "vmSize": "Standard_B2ms",
                     "osDiskSizeGB": 0
                 },
                 "source": {
@@ -70,7 +70,6 @@
                         "type": "PowerShell",
                         "name": "DeprovisioningScript",
                         "runElevated": true,
-                        "runAsSystem": true,
                         "inline": [
                             "((Get-Content -path C:\\DeprovisioningScript.ps1 -Raw) -replace 'Sysprep.exe /oobe /generalize /quiet /quit','Sysprep.exe /oobe /generalize /quit /mode:vm' ) | Set-Content -Path C:\\DeprovisioningScript.ps1"
                         ]
@@ -82,7 +81,7 @@
                             "exclude:$_.Title -like '*Preview*'",
                             "include:$true"
                         ],
-                        "updateLimit": 40
+                        "updateLimit": 20
                     }
                 ],
                 "distribute": 
