@@ -71,7 +71,7 @@
                         "name": "DeprovisioningScript",
                         "runElevated": true,
                         "inline": [
-                            "((Get-Content -path C:\\DeprovisioningScript.ps1 -Raw) -replace 'Sysprep.exe /oobe /generalize /quiet /quit','Sysprep.exe /oobe /generalize /quit /mode:vm' ) | Set-Content -Path C:\\DeprovisioningScript.ps1"
+                            "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/macquarie-cloud-services/azure-avd-azvmimagebuilder/main/DeprovisioningScript.ps1' -UseBasicParsing -OutFile c:\\DeprovisioningScript.ps1"
                         ]
                     },
                     {
