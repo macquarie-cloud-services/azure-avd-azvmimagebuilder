@@ -82,6 +82,11 @@
                             "include:$true"
                         ],
                         "updateLimit": 20
+                    },
+                    {
+                        "type": "WindowsRestart",
+                        "restartCheckCommand": "write-host 'Restarting prior to Sysprep'",
+                        "restartTimeout": "5m"
                     }
                 ],
                 "distribute": 
