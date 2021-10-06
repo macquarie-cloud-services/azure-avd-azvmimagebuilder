@@ -2,9 +2,6 @@
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-        "imageTemplateName": {
-            "type": "string"
-        },
         "api-version": {
             "type": "string"
         },
@@ -24,7 +21,6 @@
     "variables": {},
     "resources": [
         {
-            "name": "[parameters('imageTemplateName')]",
             "type": "Microsoft.VirtualMachineImages",
             "apiVersion": "[parameters('api-version')]",
             "location": "[parameters('svclocation')]",
