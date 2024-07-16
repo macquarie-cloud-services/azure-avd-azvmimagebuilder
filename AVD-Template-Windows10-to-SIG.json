@@ -62,11 +62,6 @@
                         "scriptUri": "https://raw.githubusercontent.com/macquarie-cloud-services/azure-avd-azvmimagebuilder/main/1_Optimize_OS_for_WVD.ps1"
                     },
                     {
-                        "type": "WindowsRestart",
-                        "restartCheckCommand": "write-host 'Restarting post Optimizations'",
-                        "restartTimeout": "5m"
-                    },
-                    {
                         "type": "PowerShell",
                         "name": "DeprovisioningScript",
                         "runElevated": true,
@@ -75,17 +70,8 @@
                         ]
                     },
                     {
-                        "type": "WindowsUpdate",
-                        "searchCriteria": "IsInstalled=0",
-                        "filters": [
-                            "exclude:$_.Title -like '*Preview*'",
-                            "include:$true"
-                        ],
-                        "updateLimit": 20
-                    },
-                    {
                         "type": "WindowsRestart",
-                        "restartCheckCommand": "write-host 'Restarting prior to Sysprep'",
+                        "restartCheckCommand": "write-host 'Restarting post Optimizations'",
                         "restartTimeout": "5m"
                     }
                 ],
