@@ -83,7 +83,7 @@
                         "runOutputName": "<runOutputName>",
                         "artifactTags": {
                             "source": "avd-azVmImageBuilder",
-                            "baseosimg": "[parameters('osOffer')]",
+                            "baseosimg": "[parameters('osOffer')]"
                         },
                         "replicationRegions": [
                           "<region1>"

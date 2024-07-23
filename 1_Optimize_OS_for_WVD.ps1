@@ -15,5 +15,5 @@ Expand-Archive -LiteralPath 'C:\\optimize\\azure-wvd-optimization-tool-master.zi
 Set-Location -Path C:\\optimize\\azure-wvd-optimization-tool-master
 
 # Run script
-.\Win10_VirtualDesktop_Optimize.ps1 -WindowsVersion 2009 -AcceptEULA -Verbose
+.\Windows_VDOT.ps1 -Optimizations All -Verbose -AcceptEula
 Write-Host 'AIB Customization: Finished OS Optimizations script'
