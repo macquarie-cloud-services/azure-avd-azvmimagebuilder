@@ -44,7 +44,10 @@
                 "vmProfile": 
                 {
                     "vmSize": "Standard_B2ms",
-                    "osDiskSizeGB": 0
+                    "osDiskSizeGB": 0,
+                    "tags": {
+                        "ExcludeMdeAutoProvisioning": "True"
+                    }
                 },
                 "source": {
                     "type": "PlatformImage",
