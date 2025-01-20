@@ -1,0 +1,106 @@
+{
+    "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "imageTemplateName": {
+            "type": "string"
+        },
+        "api-version": {
+            "type": "string"
+        },
+        "osPublisher": {
+            "type": "string"
+        },
+        "osOffer": {
+            "type": "string"
+        },
+        "osSKU": {
+            "type": "string"
+        },
+        "svclocation": {
+            "type": "string"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "name": "[parameters('imageTemplateName')]",
+            "type": "Microsoft.VirtualMachineImages/imageTemplates",
+            "apiVersion": "[parameters('api-version')]",
+            "location": "[parameters('svclocation')]",
+            "dependsOn": [],
+            "tags": {
+                    "imagebuilderTemplate": "AzureImageBuilderSIG",
+                    "userIdentity": "enabled"
+                },
+                "identity": {
+                    "type": "UserAssigned",
+                            "userAssignedIdentities": {
+                                "<imgBuilderId>": {}
+                            }
+                },
+            "properties": {
+                "buildTimeoutInMinutes" : 200,
+                "vmProfile": 
+                {
+                    "vmSize": "Standard_B2ms",
+                    "osDiskSizeGB": 0,
+                    "tags": {
+                        "ExcludeMdeAutoProvisioning": "True"
+                    }
+                },
+                "source": {
+                    "type": "PlatformImage",
+                    "publisher": "[parameters('osPublisher')]",
+                    "offer": "[parameters('osOffer')]",
+                    "sku": "[parameters('osSKU')]",
+                    "version": "latest"
+                },
+                "customize": [
+                    {
+                        "type": "PowerShell",
+                        "name": "OptimizeOS",
+                        "runElevated": true,
+                        "runAsSystem": true,
+                        "scriptUri": "https://raw.githubusercontent.com/macquarie-cloud-services/azure-avd-azvmimagebuilder/main/1_Optimize_OS_for_WVD.ps1"
+                    },
+                    {
+                        "type": "PowerShell",
+                        "name": "MSIXAppInstall",
+                        "runElevated": true,
+                        "runAsSystem": true,
+                        "scriptUri": "https://raw.githubusercontent.com/macquarie-cloud-services/azure-avd-azvmimagebuilder/main/MSIXPackagingApps.ps1"
+                    },
+                    {
+                        "type": "PowerShell",
+                        "name": "DeprovisioningScript",
+                        "runElevated": true,
+                        "inline": [
+                            "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/macquarie-cloud-services/azure-avd-azvmimagebuilder/main/DeprovisioningScript.ps1' -UseBasicParsing -OutFile c:\\DeprovisioningScript.ps1"
+                        ]
+                    },
+                    {
+                        "type": "WindowsRestart",
+                        "restartCheckCommand": "write-host 'Restarting post Optimizations'",
+                        "restartTimeout": "5m"
+                    }
+                ],
+                "distribute": 
+                [
+                    {
+                        "type": "SharedImage",
+                        "galleryImageId": "/subscriptions/<subscriptionID>/resourceGroups/<rgName>/providers/Microsoft.Compute/galleries/<sharedImageGalName>/images/<imageDefName>",
+                        "runOutputName": "<runOutputName>",
+                        "artifactTags": {
+                            "source": "avd-azVmImageBuilder",
+                            "baseosimg": "[parameters('osOffer')]"
+                        },
+                        "replicationRegions": [
+                          "<region1>"
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}
