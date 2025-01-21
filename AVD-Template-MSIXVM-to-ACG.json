@@ -73,6 +73,11 @@
                         ]
                     },
                     {
+                        "type": "WindowsRestart",
+                        "restartCheckCommand": "write-host 'Restarting post App Installations'",
+                        "restartTimeout": "5m"
+                    },
+                    {
                         "type": "PowerShell",
                         "name": "DeprovisioningScript",
                         "runElevated": true,
