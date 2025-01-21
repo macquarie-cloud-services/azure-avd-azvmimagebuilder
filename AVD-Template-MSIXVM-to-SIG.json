@@ -31,7 +31,8 @@
             "dependsOn": [],
             "tags": {
                     "imagebuilderTemplate": "AzureImageBuilderSIG",
-                    "userIdentity": "enabled"
+                    "userIdentity": "enabled",
+                    "ExcludeMdeAutoProvisioning": "True"
                 },
                 "identity": {
                     "type": "UserAssigned",
@@ -44,10 +45,7 @@
                 "vmProfile": 
                 {
                     "vmSize": "Standard_B2ms",
-                    "osDiskSizeGB": 0,
-                    "tags": {
-                        "ExcludeMdeAutoProvisioning": "True"
-                    }
+                    "osDiskSizeGB": 0
                 },
                 "source": {
                     "type": "PlatformImage",
