@@ -57,6 +57,18 @@
                 "customize": [
                     {
                         "type": "PowerShell",
+                        "name": "OptimizeOS",
+                        "runElevated": true,
+                        "runAsSystem": true,
+                        "scriptUri": "https://raw.githubusercontent.com/macquarie-cloud-services/azure-avd-azvmimagebuilder/main/1_Optimize_OS_for_WVD.ps1"
+                    },
+                    {
+                        "type": "WindowsRestart",
+                        "restartCheckCommand": "echo 'Restarting post Optimizations'",
+                        "restartTimeout": "5m"
+                    },
+                    {
+                        "type": "PowerShell",
                         "name": "MSIXAppInstall",
                         "runElevated": true,
                         "runAsSystem": true,
@@ -73,11 +85,6 @@
                         "runElevated": true,
                         "runAsSystem": true,
                         "scriptUri": "https://raw.githubusercontent.com/macquarie-cloud-services/azure-avd-azvmimagebuilder/main/DeprovisioningScript.ps1"
-                    },
-                    {
-                        "type": "WindowsRestart",
-                        "restartCheckCommand": "echo 'Restarting post Optimizations'",
-                        "restartTimeout": "5m"
                     }
                 ],
                 "distribute": 
