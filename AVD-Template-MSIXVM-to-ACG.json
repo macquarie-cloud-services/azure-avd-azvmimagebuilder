@@ -68,8 +68,9 @@
                         "type": "PowerShell",
                         "name": "MSIXAppInstall",
                         "runElevated": true,
-                        "runAsSystem": true,
-                        "scriptUri": "https://raw.githubusercontent.com/macquarie-cloud-services/azure-avd-azvmimagebuilder/main/MSIXPackagingApps.ps1"
+                        "inline": [
+                            "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/macquarie-cloud-services/azure-avd-azvmimagebuilder/main/MSIXPackagingApps.ps1' -UseBasicParsing -OutFile c:\\MSIXPackagingApps.ps1"
+                        ]
                     },
                     {
                         "type": "PowerShell",
