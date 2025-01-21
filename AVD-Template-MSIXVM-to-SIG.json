@@ -65,7 +65,7 @@
                     {
                         "type": "WindowsRestart",
                         "restartCheckCommand": "echo 'Restarting post Optimizations'",
-                        "restartTimeout": "5m"
+                        "restartTimeout": "15m"
                     },
                     {
                         "type": "PowerShell",
@@ -77,14 +77,16 @@
                     {
                         "type": "WindowsRestart",
                         "restartCheckCommand": "echo 'Restarting post App Installations'",
-                        "restartTimeout": "5m"
+                        "restartTimeout": "15m"
                     },
                     {
                         "type": "PowerShell",
                         "name": "DeprovisioningScript",
                         "runElevated": true,
                         "runAsSystem": true,
-                        "scriptUri": "https://raw.githubusercontent.com/macquarie-cloud-services/azure-avd-azvmimagebuilder/main/DeprovisioningScript.ps1"
+                        "inline": [
+                            "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/macquarie-cloud-services/azure-avd-azvmimagebuilder/main/DeprovisioningScript.ps1' -UseBasicParsing -OutFile c:\\DeprovisioningScript.ps1"
+                        ]
                     }
                 ],
                 "distribute": 
@@ -97,8 +99,12 @@
                             "source": "avd-azVmImageBuilder",
                             "baseosimg": "[parameters('osOffer')]"
                         },
-                        "replicationRegions": [
-                          "<region1>"
+                        "targetRegions": [
+                             {
+                                  "name": "<region1>",
+                                  "replicaCount": 1,
+                                  "storageAccountType": "Standard_ZRS"
+                             }
                         ]
                     }
                 ]
