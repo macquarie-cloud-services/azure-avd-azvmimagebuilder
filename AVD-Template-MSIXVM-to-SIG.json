@@ -73,9 +73,8 @@
                         "type": "PowerShell",
                         "name": "DeprovisioningScript",
                         "runElevated": true,
-                        "inline": [
-                            "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/macquarie-cloud-services/azure-avd-azvmimagebuilder/main/DeprovisioningScript.ps1' -UseBasicParsing -OutFile c:\\DeprovisioningScript.ps1"
-                        ]
+                        "runAsSystem": true,
+                        "scriptUri": "https://raw.githubusercontent.com/macquarie-cloud-services/azure-avd-azvmimagebuilder/main/DeprovisioningScript.ps1"
                     },
                     {
                         "type": "WindowsRestart",
