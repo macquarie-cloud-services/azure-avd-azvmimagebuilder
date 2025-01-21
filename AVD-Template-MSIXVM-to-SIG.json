@@ -75,11 +75,6 @@
                         "scriptUri": "https://raw.githubusercontent.com/macquarie-cloud-services/azure-avd-azvmimagebuilder/main/MSIXPackagingAppInstall.ps1"
                     },
                     {
-                        "type": "WindowsRestart",
-                        "restartCheckCommand": "echo 'Restarting post App Installations'",
-                        "restartTimeout": "15m"
-                    },
-                    {
                         "type": "PowerShell",
                         "name": "DeprovisioningScript",
                         "runElevated": true,
@@ -87,6 +82,11 @@
                         "inline": [
                             "Invoke-WebRequest -Uri 'https://raw.githubusercontent.com/macquarie-cloud-services/azure-avd-azvmimagebuilder/main/DeprovisioningScript.ps1' -UseBasicParsing -OutFile c:\\DeprovisioningScript.ps1"
                         ]
+                    },
+                    {
+                        "type": "WindowsRestart",
+                        "restartCheckCommand": "write-host 'Restarting post App Installations'",
+                        "restartTimeout": "15m"
                     }
                 ],
                 "distribute": 
