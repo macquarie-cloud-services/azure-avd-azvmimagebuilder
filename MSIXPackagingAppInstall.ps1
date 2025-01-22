@@ -29,3 +29,19 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\OOBE" /v Disable
 # Registry Key to disable prompt for Windows location permissions at startup
 Write-Host 'AIB Customization: Disabling Windows Location Access ...'
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v LetAppsAccessLocation /t REG_DWORD /d 1 /f
+
+# Registry Key to disable prompt for Windows find my device at startup
+Write-Host 'AIB Customization: Disabling Windows Find My Device ...'
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\FindMyDevice" /v AllowFindMyDevice /t REG_DWORD /d 0 /f
+
+# Registry Key to disable prompt for sending diagnostic data at startup
+Write-Host 'AIB Customization: Disabling Windows Sending Diagnostics Data ...'
+reg add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\DataCollection" /v AllowTelemetry /t REG_DWORD /d 1 /f
+
+# Registry Key to disable prompt for improve inking and typing at startup
+Write-Host 'AIB Customization: Disabling Windows Improve Inking and Typing ...'
+reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\TextInput" /v AllowLinguisticDataCollection /t REG_DWORD /d 0 /f
+
+# Registry Key to disable tailored experiences with diagnostic data at startup
+Write-Host 'AIB Customization: Disabling Windows Tailored Experiences with Diagnostic Data ...'
+reg add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\CloudContent" /v DisableTailoredExperiencesWithDiagnosticData /t REG_DWORD /d 1 /f
