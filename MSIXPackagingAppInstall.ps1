@@ -16,3 +16,7 @@ Invoke-WebRequest -Uri "https://msixhero.net/msix-hero-3.1.0.0.msix" -Outfile "m
 Write-Host 'AIB Customization: Installing MSIXHero ...'
 Add-AppxProvisionedPackage -Online -PackagePath 'msix-hero.msix' -SkipLicense
 Write-Host 'AIB Customization: MSIX Packaging Apps installed ...'
+
+# Registry Key to disable Windows Privacy Experience
+Write-Host 'AIB Customization: Disabling Windows Privacy Experience ...'
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\OOBE" /v DisablePrivacyExperience /t REG_DWORD /d 1 /f
