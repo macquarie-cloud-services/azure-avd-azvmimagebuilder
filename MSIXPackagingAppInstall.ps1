@@ -25,3 +25,7 @@ Write-Host 'AIB Customization: MSIX Packaging Apps installed ...'
 # Registry Key to disable Windows Privacy Experience
 Write-Host 'AIB Customization: Disabling Windows Privacy Experience ...'
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\OOBE" /v DisablePrivacyExperience /t REG_DWORD /d 1 /f
+
+# Registry Key to disable prompt for Windows location permissions at startup
+Write-Host 'AIB Customization: Disabling Windows Location Access ...'
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\AppPrivacy" /v LetAppsAccessLocation /t REG_DWORD /d 1 /f
