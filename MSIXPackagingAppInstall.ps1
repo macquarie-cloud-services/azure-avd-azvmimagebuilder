@@ -6,15 +6,20 @@ New-Item -Path $drive -Name $appName -ItemType Directory -ErrorAction SilentlyCo
 $LocalPath = $drive + '\' + $appName 
 Set-Location $LocalPath
 
-Write-Host 'AIB Customization: Downloading MSIX Packaging Tool ...'
-Invoke-WebRequest -Uri "https://download.microsoft.com/download/e/2/e/e2e923b2-7a3a-4730-969d-ab37001fbb5e/MSIXPackagingtoolv1.2024.405.0.msixbundle" -OutFile "MSIXPackagingTool.msixbundle"
-Invoke-WebRequest -Uri "https://download.microsoft.com/download/e/2/e/e2e923b2-7a3a-4730-969d-ab37001fbb5e/MSIXPackagingtoolv1.2024.405.0.License.xml" -OutFile "MSIXPackagingtool.License.xml"
-Invoke-WebRequest -Uri "https://download.microsoft.com/download/6/c/7/6c7d654b-580b-40d4-8502-f8d435ca125a/Msix-PackagingTool-Driver-Package%7E31bf3856ad364e35%7Eamd64%7E%7E1.cab" -OutFile "Msix-PackagingTool-Driver-Package_31bf3856ad364e35_amd64__1.cab"
-Write-Host 'AIB Customization: Installing MSIX Packaging Tool Driver ...'
-DISM /Online /add-package /packagepath:"Msix-PackagingTool-Driver-Package_31bf3856ad364e35_amd64__.cab" /noRestart
-Write-Host 'AIB Customization: Installing MSIX Packaging Tool ...'
-DISM /Online /Add-ProvisionedAppxPackage /PackagePath:"MSIXPackagingTool.msixbundle" /LicensePath:"MSIXPackagingtool.License.xml"
-#Add-AppxProvisionedPackage -Online -PackagePath 'MSIXPackagingTool.msix' -SkipLicense
+Write-Host 'AIB Customization: Removing AppX Packages ...'
+$appxPackage = @(
+  "Microsoft.WindowsCamera",
+  "Clipchamp.Clipchamp",
+  "MSTeams",
+  "Microsoft.Todos",
+  "Microsoft.Windows.Photos",
+  "Microsoft.WindowsSoundRecorder",
+  "Microsoft.MicrosoftStickyNotes"
+)
+Foreach ($item in $appxPackage) {
+  Write-Host "Removing AppXPackage $($item) ..."
+	Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -like ("*$item*") } | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue | Out-Null
+}
 
 Write-Host 'AIB Customization: Installing DotNET Desktop Runtime 8 (Prerequisite for MSIXHero) ...'
 Invoke-WebRequest -Uri "https://download.visualstudio.microsoft.com/download/pr/f1e7ffc8-c278-4339-b460-517420724524/f36bb75b2e86a52338c4d3a90f8dac9b/windowsdesktop-runtime-8.0.12-win-x64.exe" -Outfile ".\windowsdesktop-runtime-8.0.12-win-x64.exe"
