@@ -54,3 +54,10 @@ reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\T
 # Registry Key to disable tailored experiences with diagnostic data at startup
 Write-Host 'AIB Customization: Disabling Windows Tailored Experiences with Diagnostic Data ...'
 reg add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\CloudContent" /v DisableTailoredExperiencesWithDiagnosticData /t REG_DWORD /d 1 /f
+
+# Disable UAC
+Write-Host 'AIB Customization: Disabling UAC ...'
+reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableLUA /t REG_DWORD /d 0 /f
+
+# Disable Windows Search service
+Set-Service -Name "WSearch" -StartupType Disabled
