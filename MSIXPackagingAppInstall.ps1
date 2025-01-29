@@ -25,12 +25,6 @@ Write-Host 'AIB Customization: Installing DotNET Desktop Runtime 8 (Prerequisite
 Invoke-WebRequest -Uri "https://download.visualstudio.microsoft.com/download/pr/f1e7ffc8-c278-4339-b460-517420724524/f36bb75b2e86a52338c4d3a90f8dac9b/windowsdesktop-runtime-8.0.12-win-x64.exe" -Outfile ".\windowsdesktop-runtime-8.0.12-win-x64.exe"
 & ".\windowsdesktop-runtime-8.0.12-win-x64.exe" /install /quiet /norestart
 
-Write-Host 'AIB Customization: Downloading MSIXHero ...'
-Invoke-WebRequest -Uri "https://msixhero.net/msix-hero-3.1.0.0.msix" -Outfile "msix-hero.msix"
-Write-Host 'AIB Customization: Installing MSIXHero ...'
-Add-AppxProvisionedPackage -Online -PackagePath 'msix-hero.msix' -SkipLicense
-Write-Host 'AIB Customization: MSIX Packaging Apps installed ...'
-
 # Registry Key to disable Windows Privacy Experience
 Write-Host 'AIB Customization: Disabling Windows Privacy Experience ...'
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\OOBE" /v DisablePrivacyExperience /t REG_DWORD /d 1 /f
@@ -58,6 +52,9 @@ reg add "HKEY_LOCAL_MACHINE\Software\Policies\Microsoft\Windows\CloudContent" /v
 # Disable UAC
 Write-Host 'AIB Customization: Disabling UAC ...'
 reg add "HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableLUA /t REG_DWORD /d 0 /f
+
+# Disable UAC File Virtualization service (service will error if UAC is disabled)
+Set-Service -Name "luafv" -StartupType Disabled
 
 # Disable Windows Search service
 Set-Service -Name "WSearch" -StartupType Disabled
