@@ -21,10 +21,6 @@ Foreach ($item in $appxPackage) {
 	Get-AppxProvisionedPackage -Online | Where-Object { $_.PackageName -like ("*$item*") } | Remove-AppxProvisionedPackage -Online -ErrorAction SilentlyContinue | Out-Null
 }
 
-Write-Host 'AIB Customization: Installing DotNET Desktop Runtime 8 (Prerequisite for MSIXHero) ...'
-Invoke-WebRequest -Uri "https://download.visualstudio.microsoft.com/download/pr/f1e7ffc8-c278-4339-b460-517420724524/f36bb75b2e86a52338c4d3a90f8dac9b/windowsdesktop-runtime-8.0.12-win-x64.exe" -Outfile ".\windowsdesktop-runtime-8.0.12-win-x64.exe"
-& ".\windowsdesktop-runtime-8.0.12-win-x64.exe" /install /quiet /norestart
-
 # Registry Key to disable Windows Privacy Experience
 Write-Host 'AIB Customization: Disabling Windows Privacy Experience ...'
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\OOBE" /v DisablePrivacyExperience /t REG_DWORD /d 1 /f
