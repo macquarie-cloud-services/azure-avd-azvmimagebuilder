@@ -66,6 +66,13 @@
                     },
                     {
                         "type": "PowerShell",
+                        "name": "InstallWindowsAppRuntime1.4",
+                        "runElevated": true,
+                        "runAsSystem": true,
+                        "scriptUri": "https://raw.githubusercontent.com/macquarie-cloud-services/azure-avd-azvmimagebuilder/main/2_Optimize_AVD.ps1"
+                    },
+                    {
+                        "type": "PowerShell",
                         "name": "DeprovisioningScript",
                         "runElevated": true,
                         "inline": [
