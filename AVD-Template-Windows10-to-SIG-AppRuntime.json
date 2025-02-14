@@ -69,7 +69,7 @@
                         "name": "InstallWindowsAppRuntime1.4",
                         "runElevated": true,
                         "runAsSystem": true,
-                        "scriptUri": "https://raw.githubusercontent.com/macquarie-cloud-services/azure-avd-azvmimagebuilder/main/2_Optimize_AVD.ps1"
+                        "scriptUri": "https://raw.githubusercontent.com/macquarie-cloud-services/azure-avd-azvmimagebuilder/main/AVD-InstallWindowsAppRuntime1.4.ps1"
                     },
                     {
                         "type": "PowerShell",
